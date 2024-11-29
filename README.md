@@ -4,7 +4,7 @@
 
 In the rotating parts of motion components such as machining centers and robotic arms, bearings play a crucial role. The health condition of the bearings directly affects the operational efficiency and precision of the machining centers and robotic arms, hence the importance of fault detection for bearings. Common types of bearing failures include inner race faults, outer race faults, and ball faults. These failures typically occur due to the local damaged parts of the balls hitting the outer or inner races, or the damaged balls hitting the inner and outer races, thereby exciting high-frequency resonance between the bearings and the responding sensors. By using accelerometers to collect the vibration signals of the bearings and employing machine learning and deep learning methods to identify and judge the collected data, these faults can be effectively diagnosed.
 
-​     ![image-20241129101151134](picture\image-20241129101151134.png)
+​     ![image-20241129101151134](.\picture\image-20241129101151134.png)
 
 **Figure 1-1 Bearing Structure Schematic**
 
@@ -12,19 +12,19 @@ In addition, monitoring parameters such as the operating temperature of the robo
 
 This paper uses the open-source bearing fault diagnosis dataset from Purdue University [57], which includes vibration signal data of nine different fault types. Each fault type covers three dimensions of measurement data: drive end (DE_time), fan end (FE_time), and base (BE_time), providing a comprehensive data analysis foundation for the study.
 
-![image-20241129095324236](picture\image-20241129095324236.png)
+![image-20241129095324236](.\picture\image-20241129095324236.png)
 
 **Figure 1-2 Purdue University Bearing Fault Detection Test Bench [57]**
 
 Specifically, each fault type in the dataset includes about 85,000 data points, as shown in Figure 1-3, where the data is represented in red, green, and blue for DE_time, FE_time, and BE_time, respectively, for intuitive visualization analysis. Through in-depth analysis of this data, we can more accurately diagnose the health status of the bearings, thus providing a scientific basis for the maintenance of key motion components such as machining centers and robotic arms.
 
-![image-20241129095400634](picture\image-20241129095400634.png)
+![image-20241129095400634](.\picture\image-20241129095400634.png)
 
 **Figure 1-3 Bearing Vibration Data [57]**
 
 To enhance the accuracy and robustness of bearing fault detection, this study has augmented the dataset. Specifically, an overlapping sampling method was used to expand the training dataset. This method cleverly designs a certain proportion of overlap between each segment of the signal and its subsequent signal when extracting training samples from the original signal. This overlapping strategy not only retains the continuity and context information of the signal but also effectively increases the size of the dataset, increasing the number of training data by 14.19%. In this way, the model can be exposed to more data variations, thereby improving its generalization ability and fault diagnosis accuracy in practical applications.
 
-![image-20241129100508496](picture\image-20241129100508496.png)
+![image-20241129100508496](.\picture\image-20241129100508496.png)
 
 **Figure 1-4 Resampling Data Augmentation Schematic**
 
@@ -36,11 +36,11 @@ Additionally, the total number of training parameters for this model is 54,793, 
 
 
 
- ![image-20241129100734345](picture\image-20241129100734345.png)                       
+ ![image-20241129100734345](.\picture\image-20241129100734345.png)                       
 
- ![image-20241129100739722](picture\image-20241129100739722.png)
+ ![image-20241129100739722](.\picture\image-20241129100739722.png)
 
- ![image-20241129100746006](picture\image-20241129100746006.png)
+ ![image-20241129100746006](.\picture\image-20241129100746006.png)
 
 **Figure 2-1 CNN Model Structure**
 
@@ -50,7 +50,7 @@ The proposed CNN model was thoroughly trained to achieve the best bearing fault 
 
  
 
-![image-20241129100823031](picture\image-20241129100823031.png)![image-20241129100828748](picture\image-20241129100828748.png)
+![image-20241129100823031](.\picture\image-20241129100823031.png)![image-20241129100828748](.\picture\image-20241129100828748.png)
 
 **Figure 2-2 CNN Results, Left is Loss, Right is Accuracy**
 
@@ -74,7 +74,7 @@ GRU+CNN Model:
 - Yellow box (GRU_layer2): The second GRU layer, which further processes time series data, capturing deep temporal features.
 - Green box (GRU_fc2): The last fully connected layer, which converts the output of the GRU layer into the final classification decision.
 
- ![image-20241129100857073](picture\image-20241129100857073.png)
+ ![image-20241129100857073](.\picture\image-20241129100857073.png)
 
 **Figure 3-1 LSTM+CNN or GRU+CNN Model**
 
@@ -82,7 +82,7 @@ The CNN part of the above models consists of five convolutional pooling layers, 
 
 After the CNN layer, the model transitions to the LSTM part, which consists of two LSTM layers and two fully connected layers. The first LSTM layer (red box) begins to process time series data, capturing long-term dependencies in the signal. Subsequently, the first fully connected layer (orange box) further integrates the features from the LSTM layer. The second LSTM layer (yellow box) continues to process time series data in depth, and the second fully connected layer (green box) synthesizes this information to provide decision support for the final fault classification. Through the combination of CNN and LSTM, the model can not only capture local features of the bearing vibration signal but also understand the evolution of these features over time, thereby effectively identifying types of bearing faults. During the 20 Epoch training process, the model achieved good diagnostic results by the 4th Epoch, demonstrating the model's rapid convergence and sensitivity to fault characteristics.
 
-![image-20241129100910803](picture\image-20241129100910803.png)  ![image-20241129100915031](picture\image-20241129100915031.png)
+![image-20241129100910803](.\picture\image-20241129100910803.png)  ![image-20241129100915031](.\picture\image-20241129100915031.png)
 
  **Figure 3-2 LSTM+CNN Results, Left is Loss, Right is Accuracy**
 
@@ -90,7 +90,7 @@ In the CNN+GRU model, following the CNN part is the GRU network structure. The G
 
 
 
- ![image-20241129100947414](picture\image-20241129100947414.png)![image-20241129100951577](picture\image-20241129100951577.png)
+ ![image-20241129100947414](.\picture\image-20241129100947414.png)![image-20241129100951577](.\picture\image-20241129100951577.png)
 
 **Figure 3-3 GRU+CNN Results, Left is Loss, Right is Accuracy**
 
@@ -98,19 +98,19 @@ In the CNN+GRU model, following the CNN part is the GRU network structure. The G
 
 This paper also employs a novel hybrid model that combines the advantages of Self-Attention with CNNs to improve the performance of bearing fault diagnosis. The number of heads in the self-attention part of the model is set to 8, allowing the model to capture information in parallel in different representation subspaces, enhancing the model's understanding and processing capabilities of data.
 
-![image-20241129101011305](picture\image-20241129101011305.png)
+![image-20241129101011305](.\picture\image-20241129101011305.png)
 
 **Figure 4-1 Self-Attention and Multi-Head Self-Attention Structure [61]**
 
 The principle of Self-Attention is to compute representations based on input sequences, associating different positions of a single sequence. This mechanism can capture internal dependencies within the sequence, allowing the model to consider other elements when processing one element, thus better understanding the context of the entire sequence. In Self-Attention, each element calculates an attention score, which determines how much weight each element should be given when generating the output representation [61].
 
-![image-20241129101026006](picture\image-20241129101026006.png)
+![image-20241129101026006](.\picture\image-20241129101026006.png)
 
 **Figure 4-2 Self-Attention+CNN Model**
 
 By combining these, our model can not only leverage the powerful spatial feature extraction capabilities of CNNs but also capture deeper sequence features and context information through the self-attention mechanism. This hybrid approach enhances the model's analytical ability for bearing vibration signals, leading to more accurate diagnosis of bearing fault states. Experimental results show that the model has performed excellently in bearing fault diagnosis tasks, proving the effectiveness and potential of combining self-attention with CNNs.
 
-![image-20241129101036788](picture\image-20241129101036788.png)![image-20241129101041393](picture\image-20241129101041393.png)
+![image-20241129101036788](.\picture\image-20241129101036788.png)![image-20241129101041393](.\picture\image-20241129101041393.png)
 
 **Figure 4-3 Self-Attention+CNN Results, Left is Loss, Right is Accuracy**
 
@@ -145,7 +145,7 @@ Considering the above factors, the Self-Attention+CNN model shows its unique adv
 
 在加工中心和机械臂等运动部件的旋转部分，轴承扮演着至关重要的角色。轴承的健康状况直接影响到加工中心和机械臂的运行效率和精度，因此对其进行故障检测尤为重要。轴承的常见故障类型包括内圈故障、外圈故障和滚珠故障。这些故障的发生，通常是由于滚珠与外圈或内圈的局部损坏部分相互撞击，或者损坏的滚珠与内外圈发生撞击，从而激发出轴承与响应传感器之间的高频共振。通过使用加速度计采集轴承的振动信号，利用机器学习、深度学习的方法对采集的数据进行识别判断，可以有效地实现对这些故障的诊断。
 
-​              ![image-20241129101151134](picture\image-20241129101151134.png)                 
+​              ![image-20241129101151134](.\picture\image-20241129101151134.png)                 
 
 图1-1 轴承结构示意图
 
@@ -153,13 +153,13 @@ Considering the above factors, the Self-Attention+CNN model shows its unique adv
 
 本文采用了普渡大学开源的轴承故障诊断数据集[57]，该数据集包含了九种不同故障类型的振动信号数据。每种故障类型均涵盖了驱动端（DE_time）、风扇端（FE_time）和基座（BE_time）三个维度的测量数据，为研究提供了全面的数据分析基础。
 
-​                               ![image-20241129095324236](picture\image-20241129095324236.png)
+​                               ![image-20241129095324236](.\picture\image-20241129095324236.png)
 
 图1-2 普渡大学轴承故障检测试验台[57]
 
 具体来说，数据集中的每种故障类型都包含了约85,000条数据，如图4-4，这些数据以红色、绿色和蓝色分别表示DE_time、FE_time和BE_time，以便进行直观的可视化分析。通过对这些数据的深入分析，我们可以更准确地诊断轴承的健康状况，从而为加工中心机械臂等关键运动部件的维护提供科学依据。
 
-​     ![image-20241129095400634](picture\image-20241129095400634.png)
+​     ![image-20241129095400634](.\picture\image-20241129095400634.png)
 
 ​     
 
@@ -167,7 +167,7 @@ Considering the above factors, the Self-Attention+CNN model shows its unique adv
 
 为了提升轴承故障检测的准确性和鲁棒性，本研究对数据集进行了增强处理。具体而言，采用了重叠采样的方法来扩充训练数据集。该方法在从原始信号中提取训练样本时，巧妙地设计了每一段信号与其后继信号之间存在一定比例的重叠部分。这种重叠策略不仅保留了信号的连续性和上下文信息，而且有效地增加了数据集的大小，使训练数据的数量提升了14.19%。通过这种方式，模型能够接触到更多的数据变化，从而提高了其在实际应用中的泛化能力和故障诊断的准确性。
 
- ![image-20241129100508496](picture\image-20241129100508496.png)
+ ![image-20241129100508496](.\picture\image-20241129100508496.png)
 
 图1-4 重采样数据增强示意图
 
@@ -177,17 +177,17 @@ Considering the above factors, the Self-Attention+CNN model shows its unique adv
 
 此外，该模型的总训练参数数量为54,793，这表明模型在保持相对轻量化的同时，也具备了足够的参数来学习复杂的故障模式。这一模型设计不仅提高了故障检测的效率，也使得模型更易于训练和泛化到不同的轴承故障数据集上。
 
-​        ![image-20241129100734345](picture\image-20241129100734345.png)                       
+​        ![image-20241129100734345](.\picture\image-20241129100734345.png)                       
 
- ![image-20241129100739722](picture\image-20241129100739722.png)
+ ![image-20241129100739722](.\picture\image-20241129100739722.png)
 
- ![image-20241129100746006](picture\image-20241129100746006.png)
+ ![image-20241129100746006](.\picture\image-20241129100746006.png)
 
 图2-1 CNN模型结构
 
 对所提出的CNN模型进行了充分的训练，以达到最佳的轴承故障诊断效果。整个训练过程共设置了20个Epoch，即对整个数据集进行了20轮的遍历学习。在第8个Epoch时，模型的性能达到了一个显著的结果，此时模型的诊断准确率和泛化能力均表现良好。这一观察结果表明，该CNN模型在经过相对较少的训练周期后，就能快速收敛并捕捉到轴承故障数据中的关键特征。这种快速收敛的特性不仅提高了模型训练的效率，也减少了过拟合的风险，使得模型在实际应用中更加稳定和可靠。在第8个Epoch之后，我们继续训练模型，以确保其在不同阶段都能保持较好的性能，最终在所有设定的Epoch完成后，我们获得了一个在轴承故障诊断任务上表现较好的模型。
 
-   ![image-20241129100823031](picture\image-20241129100823031.png)![image-20241129100828748](picture\image-20241129100828748.png)
+   ![image-20241129100823031](.\picture\image-20241129100823031.png)![image-20241129100828748](.\picture\image-20241129100828748.png)
 
 图2-2 CNN结果示意，左为Loss，右为Accuracy
 
@@ -211,7 +211,7 @@ GRU+CNN模型：
 - 黄色方框（GRU_layer2）： 第二个GRU层，它进一步处理时间序列数据，捕捉深层次的时序特征。
 - 绿色方框（GRU_fc2）： 最后一个全连接层，它将GRU层的输出转换为最终的分类决策。
 
- ![image-20241129100857073](picture\image-20241129100857073.png)
+ ![image-20241129100857073](.\picture\image-20241129100857073.png)
 
 图3-1 LSTM+CNN或GRU+CNN模型示意
 
@@ -219,13 +219,13 @@ GRU+CNN模型：
 
 在CNN层之后，模型转入LSTM部分，这一部分由两个LSTM层和两个全连接层组成。第一个LSTM层（红色方框）开始处理时间序列数据，捕捉信号中的长期依赖关系。随后，第一个全连接层（橙色方框）对LSTM层的输出进行进一步的特征整合。第二个LSTM层（黄色方框）继续深入处理时间序列数据，而第二个全连接层（绿色方框）则将这些信息综合起来，为最终的故障分类提供决策支持。通过这种CNN和LSTM的结合，模型不仅能够捕捉到轴承振动信号的局部特征，还能够理解这些特征随时间的演变，从而实现对轴承故障类型的有效识别。在20个Epoch的训练过程中，模型在第4个Epoch就达到了较好的诊断效果，这表明了模型的快速收敛性和对故障特征的敏感性。
 
- ![image-20241129100910803](picture\image-20241129100910803.png)  ![image-20241129100915031](picture\image-20241129100915031.png)
+ ![image-20241129100910803](.\picture\image-20241129100910803.png)  ![image-20241129100915031](.\picture\image-20241129100915031.png)
 
 图3-2 LSTM+CNN结果，左为Loss，右为Accuracy
 
 在CNN+GRU模型紧接着CNN部分的是GRU网络结构。GRU层（红色方框）的作用是处理时间序列数据并提取时序特征。GRU是一种高效的循环神经网络变体，它通过引入更新门和重置门来控制信息的流动，从而有效地捕捉长距离依赖关系。在GRU层之后，加入了一个全连接层（橙色方框），进一步整合特征，为分类提供更丰富的特征表示。为了增加模型的深度并提高分类的准确性，我们在第一个GRU层之后又添加了一个GRU层（黄色方框），以及另一个全连接层（绿色方框）。这样的设计使得模型能够更细致地学习信号中的时间动态变化，进一步提升了故障诊断的准确性。在20个Epoch的训练过程中，GRU+CNN模型在第3个Epoch就展现出了较好的性能，这表明模型能够快速学习并识别轴承的故障特征。
 
-   ![image-20241129100947414](picture\image-20241129100947414.png)![image-20241129100951577](picture\image-20241129100951577.png)
+   ![image-20241129100947414](.\picture\image-20241129100947414.png)![image-20241129100951577](.\picture\image-20241129100951577.png)
 
 图3-3 GRU+CNN结果示意，左为Loss，右为Accuracy
 
@@ -233,19 +233,19 @@ GRU+CNN模型：
 
 本文还采用了一种新颖的混合模型，该模型将Self-Attention与CNN的优势相结合[60]，以提高轴承故障诊断的性能。模型中自注意力部分的多头数设置为8，这允许模型在不同表示子空间中并行地捕捉信息，增强了模型对数据的理解和处理能力。
 
- ![image-20241129101011305](picture\image-20241129101011305.png)
+ ![image-20241129101011305](.\picture\image-20241129101011305.png)
 
 图4-1 self-attention和multi heads self-attention结构示意[61]
 
 Self-Attention的原理是基于输入序列计算表示，它将单个序列的不同位置关联起来。这种机制能够捕捉序列内部的依赖关系，允许模型在处理一个元素时考虑到其他元素，从而更好地理解整个序列的上下文信息。在Self-Attention中，每个元素都会计算出一个注意力分数，这些分数决定了在生成输出表示时，每个元素应该被赋予多少权重[61]。
 
- ![image-20241129101026006](picture\image-20241129101026006.png)
+ ![image-20241129101026006](.\picture\image-20241129101026006.png)
 
 图4-2 Self-Attention+CNN模型示意
 
 通过这种结合，我们的模型不仅能够利用CNN强大的空间特征提取能力，还能够通过自注意力机制捕捉到更深层次的序列特征和上下文信息。这种混合方法提高了模型对轴承振动信号的分析能力，从而更准确地诊断轴承的故障状态。实验结果表明，该模型在轴承故障诊断任务上表现出了优异的性能，证明了自注意力与CNN结合的有效性和潜力。
 
-   ![image-20241129101036788](picture\image-20241129101036788.png)![image-20241129101041393](picture\image-20241129101041393.png)
+   ![image-20241129101036788](.\picture\image-20241129101036788.png)![image-20241129101041393](.\picture\image-20241129101041393.png)
 
 图4-3 Self-Attention+CNN结果示意，左为Loss，右为Accuracy
 
