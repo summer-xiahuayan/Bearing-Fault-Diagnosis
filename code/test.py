@@ -3,13 +3,13 @@ from fault_diag_utils import *
 
 if __name__ == "__main__":
     # 读取测试数据
-    data = io.loadmat("data/Fault_Diag_Data.mat")
+    data = io.loadmat("../data/Fault_Diag_Data.mat")
     test_data = torch.tensor(
         data["TestDataArray"], dtype=torch.float32).permute(2, 1, 0)
     # 获取训练设备
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # 加载已训练好的模型
-    net = torch.load("cnn_net.pth").to(DEVICE)
+    net = torch.load("../output/cnn_net.pth").to(DEVICE)
     # net = torch.load("cnn_lstm_net.pth").to(DEVICE)
     print(f"DEVICE:{DEVICE}")
     net.eval()

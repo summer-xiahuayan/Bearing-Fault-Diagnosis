@@ -58,17 +58,6 @@ def test(net: modle, dataloader: DataLoader, loss_func, datatype: str):
                                                                              test_loss, cnt, len(dataloader.dataset), acc))
 
 
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     # 记录开始时间
     start_time = time.time()
@@ -134,7 +123,7 @@ if __name__ == "__main__":
         test(net, test_loader, loss_func, "验证")
         print()
     # 保存模型
-    torch.save(net, "./cnn_gru_net.pth")
+    torch.save(net, "../output/cnn_gru_net.pth")
     # 记录结束时间
     end_time = time.time()
 

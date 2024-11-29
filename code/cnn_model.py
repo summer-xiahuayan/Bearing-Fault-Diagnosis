@@ -378,14 +378,14 @@ if __name__ == '__main__':
     # vis_graph.save("./CNN_vis_graph.png",format="png")
     #summary(net, input_size=(3, 1024))
 
-        # 随机生成输入数据
+    # 随机生成输入数据
     input_size =x
     # 前向传播
     output = net(input_size)
     # 打印输出形状
     print(output.shape)
 
-    onnx_path = "SimpleLSTMCNN.onnx"  # 模型onx格式的保存路径和命名
+    onnx_path = "../output/SimpleLSTMCNN.onnx"  # 模型onx格式的保存路径和命名
     torch.onnx.export(net, input_size, onnx_path)
     netron.start(onnx_path)
 
